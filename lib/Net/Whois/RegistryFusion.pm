@@ -46,7 +46,8 @@ Returns whois info in xml format for given $domain. Checks the cache first. If n
 
 =head2 getFetchedDomains
 
-Accessor returns arrayref of domains that had the whois info fetched from RegistryFusion (and not the cache)
+Fetched domains are those domains that had the whois info fetched from RegistryFusion and not the cache.
+Accessor returns array in list context or a Set::Array object in scalar context.
 
 =head2 isCached ($domain)
 
@@ -108,6 +109,7 @@ use File::Slurp (); # don't import File::Slurp symbols to avoid collisions and r
 use File::stat;
 use IO::LockedFile;
 use Date::Format;
+use Set::Array;
 use Error;
 
 use constant AUTH       => 'http://whois.RegistryFusion.com/rf/xml/1.0/auth/';
@@ -117,20 +119,19 @@ use constant TRUE       => 1;
 use constant FALSE      => 0;
 
 use vars qw($VERSION);
-$VERSION = '0.01';
+$VERSION = '0.02';
 
+
+use fields qw(sessionKey fetchedDomains refreshCache);
 
 sub new {
-    my ($class, %opts) = @_;
+    my ($self, %opts) = @_;
 
-    my $self = { 
-        'sessionKey'            => undef,
-        'fetchedDomains'        => [],
-        'refreshCache'          => $opts{refreshCache} || FALSE,
-    };
+    $self = fields::new($self) unless ref $self;
 
-    bless $self, $class;
-    $self->{'sessionKey'} = $self->_login();
+    $self->{'fetchedDomains'}   = new Set::Array;
+    $self->{'sessionKey'}       = $self->_login();
+    $self->{'refreshCache'}     = $opts{'refreshCache'} || FALSE;
     return $self;
 }
 
@@ -201,7 +202,7 @@ sub _whois {
         or throw Error::Simple("get $url failed");
 
 # record the domain as fetched for reporting purposes
-    push @{ $self->{fetchedDomains} }, $domain;
+    $self->{fetchedDomains}->push($domain);
 # cache the xml
     $self->_cache($xml, $domain);
 
@@ -211,18 +212,19 @@ sub _whois {
 sub getFetchedDomains {
     my ($self) = @_;
 
-    return $self->{fetchedDomains};
+    return wantarray ? @{ $self->{fetchedDomains} } : $self->{fetchedDomains};
 }
 
 sub _getFilename {
     my ($self, $domain) = @_;
 
     unless ( $domain ) {
+        throw Error::Simple("_getFilename called without domain argument");
     }
+
     my $subdir = lc(substr($domain, 0, 1));
     my $filename = $self->_getXmlpath() . "/$subdir/$domain.xml";
 
-    # YYY: not nice to return different variable types based on context
     return wantarray ? ($filename, $subdir) : $filename;
 }
 
@@ -249,7 +251,7 @@ sub _getCached {
 
     my $filename = $self->_getFilename($domain);
     my $file = new IO::LockedFile $filename;
-    if ( my $xml = File::Slurp::read_file($file) ) { #YYY: Perl6::Slurp is nicer but requires perl5.8
+    if ( my $xml = File::Slurp::read_file($file) ) { #YYY: Perl6::Slurp is nicer but requires perl5.8+
         return $xml;
     }
 }

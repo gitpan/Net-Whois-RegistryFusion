@@ -15,6 +15,7 @@ WriteMakefile(
             'IO::LockedFile'      => undef,
             'Date::Format'        => undef,
             'Error'               => undef,
+            'Set::Array'          => undef,
         },
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Net/Whois/RegistryFusion.pm', # retrieve abstract from module
