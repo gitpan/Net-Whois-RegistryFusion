@@ -1,5 +1,8 @@
 Revision history for Perl extension Net::Whois::RegistryFusion.
 
+0.03     Thu Jul  7 14:43:11 2004
+	- fixed SIGNATURE
+
 0.02     Thu Jul  7 14:43:11 2004
 	- use fields and Set::Array
 

@@ -119,7 +119,7 @@ use constant TRUE       => 1;
 use constant FALSE      => 0;
 
 use vars qw($VERSION);
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 
 use fields qw(sessionKey fetchedDomains refreshCache);
