@@ -20,6 +20,19 @@ You must also implement the _getUsername, _getPassword, _getXmlpath methods.
 The class does some basic on-disk caching of the raw xml retrieved from RegistryFusion.
 The path to the cache is specified using _getXmlpath method.
 
+=head1 REQUIRED MODULES
+
+ Date::Format (any)
+ Error (any)
+ File::Slurp (any)
+ File::stat (any)
+ IO::LockedFile (any)
+ LWP::Simple (any)
+ Module::Signature (any)
+ Set::Array (any)
+ Test::More (any)
+ Test::Signature (any)
+
 =head1 ABSTRACT METHODS
 
 =head2 _getUsername
@@ -42,7 +55,7 @@ This is the constructor. It takes as argument an optional hash with a 'resetCach
 
 =head2 whois ($domain)
 
-Returns whois info in xml format for given $domain. Checks the cache first. If not found in the cache, retrieves from RegistryFusion. The whois xml info is cached in a file under the path as returned by _getXmlpath method. So, if the XMLPATH is '/registryfusion' and the $domain is 'example.com', the file will be stored as '/registryfusion/e/example.com.xml'
+Returns (scalar) whois info in xml format for given $domain. Checks the cache first. If not found in the cache, retrieves from RegistryFusion. The whois xml info is cached in a file under the path as returned by _getXmlpath method. So, if the XMLPATH is '/registryfusion' and the $domain is 'example.com', the file will be stored as '/registryfusion/e/example.com.xml'
 
 =head2 getFetchedDomains
 
@@ -119,7 +132,7 @@ use constant TRUE       => 1;
 use constant FALSE      => 0;
 
 use vars qw($VERSION);
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 
 use fields qw(sessionKey fetchedDomains refreshCache);

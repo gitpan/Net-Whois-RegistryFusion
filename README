@@ -1,4 +1,4 @@
-Net-Whois-RegistryFusion version 0.03
+Net-Whois-RegistryFusion version 0.04
 ========================================
 
 This module lets you perform cacheable whois lookups using RegistryFusion XML API
@@ -17,16 +17,17 @@ To install this module type the following:
    make test
    make install
 
-DEPENDENCIES
-
-This module requires these other modules and libraries:
-
-    LWP::Simple
-    File::Slurp
-    File::stat
-    IO::LockedFile
-    Date::Format
-    Error
+Required Modules:
+ Date::Format (any)
+ Error (any)
+ File::Slurp (any)
+ File::stat (any)
+ IO::LockedFile (any)
+ LWP::Simple (any)
+ Module::Signature (any)
+ Set::Array (any)
+ Test::More (any)
+ Test::Signature (any)
 
 COPYRIGHT AND LICENCE
 

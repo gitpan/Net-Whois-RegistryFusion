@@ -1,5 +1,8 @@
 Revision history for Perl extension Net::Whois::RegistryFusion.
 
+0.04     Tue Aug 24 16:24:01 2004
+        - removed requirement of perl 5.8.4 in Makefile.PL
+
 0.03     Thu Jul  7 14:43:11 2004
 	- fixed SIGNATURE
 

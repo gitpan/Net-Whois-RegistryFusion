@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.39.
+signed via the Module::Signature module, version 0.41.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,17 +14,17 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 13fd1c88ff8b69e63e9d87ed055c3cdacf335ccd Changes
+SHA1 28a7e2f2f459883bb273c4bb2f0f887f3545c80c Changes
 SHA1 632b55ef8d84912e8220efa4fe71914e402f2115 MANIFEST
-SHA1 4ef965c6128403ec2766355eb9f77a1605a5658f META.yml
-SHA1 5f7f5b1569e98b910e8a6f155a7fc2fa3932879f Makefile.PL
-SHA1 052562c63c6fb75d94e3b0adc06ceed05da57235 README
-SHA1 8513520ee1d8e8368e1c400d7ebacb0529850ab2 lib/Net/Whois/RegistryFusion.pm
-SHA1 0a9afe377a0187fdeaad8dbf190190e1afec9fb0 t/Net-Whois-RegistryFusion.t
+SHA1 7a98c500f38e3863b9a7b8b7c1b100b82d29a8ef META.yml
+SHA1 9fc56ca7db6f25c146928053bdf421ff5206b019 Makefile.PL
+SHA1 9cd71d1a5a7dc4f0c617062606d56e679d375e4b README
+SHA1 97091d0d4ac8b41c2baad519986ef669abbad6d5 lib/Net/Whois/RegistryFusion.pm
+SHA1 4817dbec57b0c148fd3c24c740dbb076a82951a6 t/Net-Whois-RegistryFusion.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.2.4 (GNU/Linux)
 
-iD8DBQFA7VpJkE9jMGrkBcgRAqwXAJ9JfMecHyWyh+M9KDBPg0aefujyAACfZGlu
-bpEqd+7qe5SOjDJx3O6aO+c=
-=aFdY
+iD8DBQFBK6W8kE9jMGrkBcgRAkfXAJ0dPJnNH3F6B/Q2IbYRaDk5UZkftgCcCO/n
+ANJQktytqR5tXS1V+cGw1+M=
+=hGub
 -----END PGP SIGNATURE-----
