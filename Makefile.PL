@@ -6,6 +6,9 @@ WriteMakefile(
     NAME              => 'Net::Whois::RegistryFusion',
     VERSION_FROM      => 'lib/Net/Whois/RegistryFusion.pm', # finds $VERSION
     PREREQ_PM         => {
+            'Module::Signature'   => undef,
+            'Test::Signature'     => undef,
+            'Test::More'          => undef,
             'LWP::Simple'         => undef,
             'File::Slurp'         => undef,
             'File::stat'          => undef,

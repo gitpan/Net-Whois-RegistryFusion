@@ -117,7 +117,7 @@ use constant TRUE       => 1;
 use constant FALSE      => 0;
 
 use vars qw($VERSION);
-$VERSION = '0.00_01';
+$VERSION = '0.01';
 
 
 sub new {
