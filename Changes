@@ -1,0 +1,6 @@
+Revision history for Perl extension Net::Whois::RegistryFusion.
+
+0.00_01  Thu Jul  1 18:19:11 2004
+	- original version; created by h2xs 1.23 with options
+		-BAX -n Net::Whois::RegistryFusion
+
