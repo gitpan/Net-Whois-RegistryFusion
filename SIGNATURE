@@ -1,12 +1,12 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.41.
+signed via the Module::Signature module, version 0.55.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
 
     % cpansign -v
 
-It would check each file's integrity, as well as the signature's
+It will check each file's integrity, as well as the signature's
 validity.  If "==> Signature verified OK! <==" is not displayed,
 the distribution may already have been compromised, and you should
 not run its Makefile.PL or Build.PL.
@@ -14,17 +14,17 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 28a7e2f2f459883bb273c4bb2f0f887f3545c80c Changes
+SHA1 c1360ebaf4ef82f0d2695f037984ce1d54fc2640 Changes
 SHA1 632b55ef8d84912e8220efa4fe71914e402f2115 MANIFEST
-SHA1 7a98c500f38e3863b9a7b8b7c1b100b82d29a8ef META.yml
+SHA1 7abd0c01d899b7a9c98c611e2f20f7a6c1858ba7 META.yml
 SHA1 9fc56ca7db6f25c146928053bdf421ff5206b019 Makefile.PL
-SHA1 9cd71d1a5a7dc4f0c617062606d56e679d375e4b README
-SHA1 97091d0d4ac8b41c2baad519986ef669abbad6d5 lib/Net/Whois/RegistryFusion.pm
+SHA1 57e6cfa85ef25749c6751409885b78f9e02186bf README
+SHA1 dbae6c464846e3548f96fbb0a985c517157edd24 lib/Net/Whois/RegistryFusion.pm
 SHA1 4817dbec57b0c148fd3c24c740dbb076a82951a6 t/Net-Whois-RegistryFusion.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.2.4 (GNU/Linux)
+Version: GnuPG v1.4.7 (Darwin)
 
-iD8DBQFBK6W8kE9jMGrkBcgRAkfXAJ0dPJnNH3F6B/Q2IbYRaDk5UZkftgCcCO/n
-ANJQktytqR5tXS1V+cGw1+M=
-=hGub
+iD8DBQFG6AzakE9jMGrkBcgRAuaqAJ9iTFFlwT/l52zVU4OvF3ZS3fxCLACfboEW
+eWmsPqgUp6KQhStmqtD1Qnk=
+=9wSS
 -----END PGP SIGNATURE-----

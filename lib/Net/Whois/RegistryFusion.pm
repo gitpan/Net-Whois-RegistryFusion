@@ -6,10 +6,15 @@ Net::Whois::RegistryFusion - perform cacheable whois lookups using RegistryFusio
 
 =head1 SYNOPSIS 
 
-    my $rf = new Net::Whois::RegistryFusion;
+    $rf = Net::Whois::RegistryFusion->new();
+    # OR:
+    $rf = Net::Whois::RegistryFusion->new({ refreshCache=>1, 
+                                            AUTH=>'http://hexillion.com/rf/xml/1.0/auth/',
+                                            WHOIS=>'http://hexillion.com/rf/xml/1.0/whois/'
+                                          });
     $rf->isCached('domain.com') 
     && 
-    my $xml = $rf->whois('domain.com');
+    $xml = $rf->whois('domain.com');
 
 =head1 DESCRIPTION
 
@@ -51,7 +56,13 @@ Must be implemented to return a path where XML cache files will be stored
 
 =head2 new
 
-This is the constructor. It takes as argument an optional hash with a 'resetCache' key. Setting 'resetCache' to a value of 1 will alter the behaviour of the whois method for the lifetime of the object; foregoing and deleting the cached domain (if any) and retrieving directly from RegistryFusion.
+This is the constructor. It takes as argument a hashref of options.
+
+One option is 'refreshCache'. Setting 'refreshCache' to a value of 1 will alter the behaviour of the whois method for the lifetime of the object; foregoing and deleting the cached domain (if any) and retrieving directly from RegistryFusion.
+
+You can also pass the auth url in the 'AUTH' key and the whois url in 'WHOIS' key, overriding the default values of:
+AUTH    => 'http://whois.RegistryFusion.com/rf/xml/1.0/auth/';
+WHOIS   => 'http://whois.RegistryFusion.com/rf/xml/1.0/whois/';
 
 =head2 whois ($domain)
 
@@ -132,19 +143,21 @@ use constant TRUE       => 1;
 use constant FALSE      => 0;
 
 use vars qw($VERSION);
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 
-use fields qw(sessionKey fetchedDomains refreshCache);
+use fields qw(sessionKey fetchedDomains refreshCache AUTH WHOIS);
 
 sub new {
-    my ($self, %opts) = @_;
+    my ($self, $opts) = @_;
 
     $self = fields::new($self) unless ref $self;
 
     $self->{'fetchedDomains'}   = new Set::Array;
+    $self->{'refreshCache'}     = $opts->{'refreshCache'} || FALSE;
+    $self->{'AUTH'}             = $opts->{'AUTH'} || AUTH;
+    $self->{'WHOIS'}            = $opts->{'WHOIS'} || WHOIS;
     $self->{'sessionKey'}       = $self->_login();
-    $self->{'refreshCache'}     = $opts{'refreshCache'} || FALSE;
     return $self;
 }
 
@@ -155,7 +168,7 @@ sub _login {
         # already logged in
         return;
     }
-    my $url = AUTH . "?username=" . $self->_getUsername() . "&password=" . $self->_getPassword();
+    my $url = $self->{AUTH} . "?username=" . $self->_getUsername() . "&password=" . $self->_getPassword();
     my $xml = get($url)
         or throw Error::Simple("failed to get $url");
     $xml =~ m#<SessionKey>(.*)</SessionKey>#
@@ -166,7 +179,7 @@ sub _login {
 sub logout {
     my ($self) = @_;
 
-    my $url = AUTH . "?sessionkey=" . $self->getSessionKey();
+    my $url = $self->{AUTH} . "?sessionkey=" . $self->getSessionKey();
     get($url);
 }
 
@@ -210,7 +223,7 @@ sub _whois {
 # here we do the actual whois lookup
     my ($self, $domain) = @_;
 
-    my $url = WHOIS . "?sessionkey=". $self->getSessionKey() . "&query=$domain";
+    my $url = $self->{WHOIS} . "?sessionkey=". $self->getSessionKey() . "&query=$domain";
     my $xml = get($url)
         or throw Error::Simple("get $url failed");
 
